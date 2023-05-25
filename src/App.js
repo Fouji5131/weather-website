@@ -40,9 +40,11 @@ function App() {
 
   if (isLoading) {
     return (
-      <div>
-        <div>{/* <Particle className="z-0" /> */}</div>
-        <div>Loading...</div>
+      <div className="relative flex justify-center space-y-10 text-white">
+        <Particle className="z-0" />
+        <div className="z-10 relative flex justify-center space-y-10 2xl:space-y-40 w-11/12">
+          <div>Loading...</div>
+        </div>
       </div>
     );
   }
