@@ -6,47 +6,39 @@ import UV from "../../assets/images/uv.png";
 import Visibility from "../../assets/images/visibility.png";
 import AirPressure from "../../assets/images/air-pressure.png";
 
-const WeatherDetails = (props) => {
-  return (
-    <div className="xl:w-1/2 space-y-10 xl:space-y-5 pb-10 xl:pb-0">
-      <div className=" background flex items-center justify-center h-60 2xl:h-80">
-        <table className="w-11/12">
-          <tbody className="space-y-3 2xl:space-y-5 flex flex-col">
-            <tr className="w-full flex justify-between">
-              <td>Tomorrow</td>
-              <td>Thunderstorm</td>
-              <td>31/22</td>
-            </tr>
-            <tr className="w-full flex justify-between">
-              <td>Tomorrow</td>
-              <td>Thunderstorm</td>
-              <td>31/22</td>
-            </tr>
-            <tr className="w-full flex justify-between">
-              <td>Tomorrow</td>
-              <td>Thunderstorm</td>
-              <td>31/22</td>
-            </tr>
-            <tr className="w-full flex justify-between">
-              <td>Tomorrow</td>
-              <td>Thunderstorm</td>
-              <td>31/22</td>
-            </tr>
-            <tr className="w-full flex justify-between">
-              <td>Tomorrow</td>
-              <td>Thunderstorm</td>
-              <td>31/22</td>
-            </tr>
-            <tr className="w-full flex justify-between">
-              <td>Tomorrow</td>
-              <td>Thunderstorm</td>
-              <td>31/22</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+const Weather = (props) => {
+  const getDayOfWeek = () => {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const currentDate = new Date();
+    const dayIndex = currentDate.getDay();
+    return days[dayIndex];
+  };
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-3 gap-2 xl:gap-5 w-full">
+  return (
+    <div className=" space-y-10 w-full">
+      <div className="flex justify-center  ">
+        <div className="text-center p-5 space-y-2">
+          <h1 className="text-9xl">
+            {Math.round(props.weatherData.main.temp) + "°"}
+          </h1>
+          <p className="text-3xl">{props.weatherData.weather[0].main}</p>
+          <p>
+            {getDayOfWeek()}{" "}
+            {Math.round(props.weatherData.main.temp_max) + "°" + " / "}
+            {Math.round(props.weatherData.main.temp_min) + "°"}
+          </p>
+          <h1>{props.weatherData.name}</h1>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-5 gap-2 xl:gap-5 w-full pb-5 ">
         <div className="background h-24 flex items-center justify-around">
           <div className="flex justify-between w-4/5">
             <img src={Thermometer} alt="" className="w-12 h-12" />
@@ -76,7 +68,7 @@ const WeatherDetails = (props) => {
             </div>
           </div>
         </div>
-        <div className="background h-24 flex items-center justify-around">
+        {/* <div className="background h-24 flex items-center justify-around">
           <div className="flex justify-between w-4/5">
             <img src={UV} alt="" className="w-12 h-12" />
             <div className="text-right">
@@ -84,7 +76,7 @@ const WeatherDetails = (props) => {
               <h1>28</h1>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="background h-24 flex items-center justify-around">
           <div className="flex justify-between w-4/5">
             <img src={Visibility} alt="" className="w-12 h-12" />
@@ -108,4 +100,4 @@ const WeatherDetails = (props) => {
   );
 };
 
-export default WeatherDetails;
+export default Weather;

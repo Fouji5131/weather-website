@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Particle from "./components/particles/particles";
+import Weather from "./components/weather/weather";
 import Input from "./components/ui/input";
-import CurrentWeather from "./components/weather/currentWeather";
-import WeatherDetails from "./components/weather/weatherDetails";
 
 function App() {
   const API_KEY = "22dc56efa069eb03e68e1fc3ed879eb0";
@@ -13,7 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [city, setCity] = useState("lahore");
+  const [city, setCity] = useState("london");
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -36,14 +35,14 @@ function App() {
     };
 
     fetchWeatherData();
-  }, []);
+  }, [city]);
 
   if (isLoading) {
     return (
       <div className="relative flex justify-center space-y-10 text-white">
         <Particle className="z-0" />
         <div className="z-10 relative flex justify-center space-y-10 2xl:space-y-40 w-11/12">
-          <div>Loading...</div>
+          <div className="text-xl">Loading...</div>
         </div>
       </div>
     );
@@ -51,31 +50,25 @@ function App() {
 
   if (error) {
     return (
-      <div>
-        {/* <Particle className="z-0" /> */}
-        <div>
-          <div>{error}</div>
+      <div className="relative flex justify-center space-y-10 text-white">
+        <Particle className="z-0" />
+        <div className="z-10 relative flex flex-col justify-center space-y-5 2xl:space-y-40 w-4/5">
           <div>
             <Input setCity={setCity} />
           </div>
+          <div className="text-center text-xl">{error}</div>
         </div>
       </div>
     );
   }
 
-  console.log(weatherData);
-
   return (
     <div className="relative flex justify-center space-y-10 text-white">
       <Particle className="z-0" />
-      <div className="z-10 relative space-y-10 2xl:space-y-40 w-11/12">
+      <div className="z-10 relative space-y-10 2xl:space-y-40 w-4/5">
         <Input setCity={setCity} />
 
-        <div className="flex flex-col xl:flex-row justify-center space-y-10 xl:space-y-0 xl:space-x-10 w-full ">
-          <CurrentWeather weatherData={weatherData} />
-
-          <WeatherDetails weatherData={weatherData} />
-        </div>
+        <Weather weatherData={weatherData} />
       </div>
     </div>
   );
