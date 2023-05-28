@@ -29,13 +29,13 @@ const Weather = (props) => {
           <h1 className="text-9xl">
             {Math.round(props.weatherData.main.temp) + "°"}
           </h1>
-          <p className="text-3xl">{props.weatherData.weather[0].main}</p>
+          <p className="text-2xl">{props.weatherData.weather[0].main}</p>
           <p>
             {getDayOfWeek()}{" "}
             {Math.round(props.weatherData.main.temp_max) + "°" + " / "}
             {Math.round(props.weatherData.main.temp_min) + "°"}
           </p>
-          <h1>{props.weatherData.name}</h1>
+          <h1 className="text-4xl">{props.weatherData.name}</h1>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-5 gap-2 xl:gap-5 w-full pb-5 ">
